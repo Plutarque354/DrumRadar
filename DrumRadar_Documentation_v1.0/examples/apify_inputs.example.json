@@ -1,0 +1,23 @@
+{
+  "status": "illustrative API inputs only; NOT executed; no token included",
+  "actor": "deepmine/instagram-scraper",
+  "reels": {
+    "resultsType": "reels",
+    "usernames": ["slrnoise", "brycewestondrums", "lukehollandd"],
+    "resultsLimit": 10,
+    "onlyPostsNewerThan": "4 days",
+    "skipPinnedPosts": false,
+    "maxResults": 30
+  },
+  "details": {
+    "resultsType": "details",
+    "usernames": ["slrnoise", "brycewestondrums", "lukehollandd"],
+    "maxResults": 3
+  },
+  "direct_reel": {
+    "resultsType": "reels",
+    "directUrls": ["https://www.instagram.com/reel/DTsrSE2Dm9R/"],
+    "resultsLimit": 1,
+    "maxResults": 1
+  }
+}
