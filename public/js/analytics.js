@@ -1,6 +1,6 @@
 import {inWindow} from './time.js';
 export function reach(r,metric='plays') {return r.followers>0 && r[metric]!=null?r[metric]/r.followers:null;}
-export function engagement(r) {return r.followers>0 && r.likes!=null && r.comments!=null?100*(r.likes+r.comments)/r.followers:null;}
+export function engagement(r) {return r.followers>0 && r.likes!=null && r.comments!=null?100*(r.likes+2.5*r.comments)/r.followers:null;}
 export function eligible(rows,anchor,hours) {return rows.filter(r=>r.sourceType==='watchlist'&&inWindow(r.publishedAt,anchor,hours));}
 export function rank(rows,kind,metric='plays') {
   const value=r=>kind==='reach'?reach(r,metric):kind==='engagement'?engagement(r):r[metric];
