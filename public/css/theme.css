@@ -1,0 +1,109 @@
+/* DrumRadar v1.1 appearance layer: load AFTER app.css. */
+:root { color-scheme: light; }
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 36px;
+  padding: 8px 12px;
+  white-space: nowrap;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 12px;
+  letter-spacing: 0;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  transition: background-color .16s ease, border-color .16s ease;
+}
+.theme-toggle-icon { font-size: 17px; line-height: 1; }
+.theme-toggle:hover { border-color: var(--teal); background: var(--pale); }
+.theme-toggle[aria-pressed="true"] { border-color: #36766e; background: #193b39; color: #d9fff5; }
+.theme-toggle[aria-pressed="true"]:hover { background: #23524c; }
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ink: #e4f1ef;
+  --muted: #9eb5b1;
+  --teal: #55d8b8;
+  --pale: #163e39;
+  --border: #2d4545;
+  --canvas: #0c171b;
+  --surface: #16262b;
+  --shadow: 0 6px 24px #0000002a;
+}
+:root[data-theme="dark"] body { background: var(--canvas); }
+:root[data-theme="dark"] .sidebar,
+:root[data-theme="dark"] .stat,
+:root[data-theme="dark"] .card,
+:root[data-theme="dark"] .creator-card,
+:root[data-theme="dark"] dialog { background: var(--surface); color: var(--ink); }
+:root[data-theme="dark"] .topbar { background: #142328ee; }
+:root[data-theme="dark"] .slash { color: #6a8480; }
+:root[data-theme="dark"] .nav-label { color: #8ca4a0; }
+:root[data-theme="dark"] nav a:hover { background: #203839; }
+:root[data-theme="dark"] nav a.active { background: var(--pale); color: #73e5c8; }
+:root[data-theme="dark"] .brand-icon { background: #158c7a; }
+:root[data-theme="dark"] .pill,
+:root[data-theme="dark"] .badge { background: var(--pale); color: #7be8d0; }
+:root[data-theme="dark"] .pill.demo { background: #423318; color: #f2cc82; }
+:root[data-theme="dark"] .banner { background: #173a35; border-color: #2e5c50; color: #d3ede5; }
+:root[data-theme="dark"] .banner.demo { background: #342a1a; border-color: #665332; color: #f0d6a5; }
+
+:root[data-theme="dark"] button { background: #21363a; color: var(--ink); border-color: var(--border); }
+:root[data-theme="dark"] button:hover:not(:disabled) { background: #2a4749; }
+:root[data-theme="dark"] button.primary { background: #138874; color: #fff; border-color: #138874; }
+:root[data-theme="dark"] button.primary:hover:not(:disabled) { background: #18a18a; }
+:root[data-theme="dark"] button.danger { color: #ffaaa4; }
+:root[data-theme="dark"] button.reel-link { background: transparent; color: var(--ink); border: 0; }
+:root[data-theme="dark"] button.reel-link:hover { background: transparent; color: var(--teal); }
+:root[data-theme="dark"] .tabs button.selected { background: #3cbfa4; color: #0b2623; border-color: #3cbfa4; }
+:root[data-theme="dark"] .tabs button.selected:hover { background: #6ad5bc; }
+:root[data-theme="dark"] .tag { background: #21433d; color: #97f1dc; }
+:root[data-theme="dark"] .tag:hover { background: #2b584e; }
+:root[data-theme="dark"] .theme-toggle { background: #1c3336; border-color: #355353; color: var(--ink); }
+:root[data-theme="dark"] .theme-toggle:hover { background: #294b49; }
+:root[data-theme="dark"] .theme-toggle[aria-pressed="true"] { border-color: #51bca6; background: #214941; color: #e3fff6; }
+
+:root[data-theme="dark"] input,
+:root[data-theme="dark"] select,
+:root[data-theme="dark"] textarea {
+  background: #102024;
+  color: var(--ink);
+  border-color: #37514f;
+}
+:root[data-theme="dark"] input::placeholder,
+:root[data-theme="dark"] textarea::placeholder { color: #849c97; opacity: 1; }
+:root[data-theme="dark"] input:focus,
+:root[data-theme="dark"] select:focus,
+:root[data-theme="dark"] textarea:focus { border-color: #55d8b8; }
+:root[data-theme="dark"] input[type="checkbox"] { accent-color: #55d8b8; }
+:root[data-theme="dark"] th { background: #1e3135; color: #b3cac4; }
+:root[data-theme="dark"] td { border-bottom-color: #2b4343; }
+:root[data-theme="dark"] .rank { color: #9bb5ad; }
+:root[data-theme="dark"] .tier { background: #2b3c3e; color: #c0d8d0; }
+:root[data-theme="dark"] .tier.S { background: #145141; color: #a0f7d4; }
+:root[data-theme="dark"] .tier.A { background: #174941; color: #a4eddc; }
+:root[data-theme="dark"] .tier.B { background: #404528; color: #e0e9a2; }
+:root[data-theme="dark"] .tier.C { background: #4c3828; color: #f3d1a5; }
+:root[data-theme="dark"] .tier.D { background: #4a3030; color: #f1bdb0; }
+:root[data-theme="dark"] .detail-metrics div { background: #20373a; }
+:root[data-theme="dark"] .checklist { background: #132529; }
+:root[data-theme="dark"] dialog::backdrop { background: #020a0cc7; }
+:root[data-theme="dark"] #notice { background: #275449; color: #f1fffa; }
+:root[data-theme="dark"] .skip { background: #223e3e; color: #e9fff6; }
+:root[data-theme="dark"] footer { color: #90aaa4; }
+
+@media (max-width: 600px) {
+  .topbar { gap: 8px; padding-inline: 14px; }
+  .topbar > span { white-space: nowrap; }
+  .topbar .actions { flex-wrap: nowrap; gap: 7px; }
+  .topbar #source { display: none; }
+  .topbar #scan-open { white-space: nowrap; padding: 9px 10px; }
+  .theme-toggle { width: 38px; min-width: 38px; padding: 8px; }
+  .theme-toggle-text { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle { transition: none; }
+}
