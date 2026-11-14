@@ -94,5 +94,17 @@ document.addEventListener('submit',async event=>{event.preventDefault();const fo
   if(form.id==='scan-form'){if(busy||pending)return;const input=scanInput(form);if(!input.handles.length&&!input.reference)throw Error('Choose at least one creator or a Reel.');pending={id:crypto.randomUUID(),input,status:'PENDING',createdAt:new Date().toISOString()};await db.put('settings',{id:'pending',value:pending});modal.close();location.hash='history';await runPending();}
 }catch(e){fail(e);}});
 $('#scan-open').addEventListener('click',()=>scanForm());window.addEventListener('hashchange',()=>{page=1;query='';tier='';creatorFilter='';sort='date';render();});
-async function init(){[creators,scans,ideas]=await Promise.all(['creators','scans','ideas'].map(db.all));const prefs=await db.all('settings');settings=prefs.find(x=>x.id==='preferences')||{};pending=prefs.find(x=>x.id==='pending')?.value||null;if(!prefs.some(x=>x.id==='initialized')){for(const [i,h]of ['slrnoise','brycewestondrums','lukehollandd'].entries()){const c={id:h,handle:h,category:'Drummer',enabled:true,priority:i+1,zone:'',note:''};await db.put('creators',c);creators.push(c);}await db.put('settings',{id:'initialized',value:true});}scans.sort((a,b)=>Date.parse(b.startedAt)-Date.parse(a.startedAt));current=settings.current||null;metric=settings.metric||'plays';render();if(pending)toast('A saved scan can be resumed in Scan History after you enter the owner token.');}
+async function init(){[creators,scans,ideas]=await Promise.all(['creators','scans','ideas'].map(db.all));const prefs=await db.all('settings');settings=prefs.find(x=>x.id==='preferences')||{};pending=prefs.find(x=>x.id==='pending')?.value||null;if(!prefs.some(x=>x.id==='initialized')){for(const [i,h]of ['slrnoise','brycewestondrums','lukehollandd'].entries()){const c={id:h,handle:h,category:'Drummer',enabled:true,priority:i+1,zone:'',note:''};await db.put('creators',c);creators.push(c);}await db.put('settings',{id:'initialized',value:true});}scans.sort((a,b)=>Date.parse(b.startedAt)-Date.parse(a.startedAt));current=settings.current||null;
+  // Hosted GitHub Pages welcome screen: show an explicitly synthetic sample
+  // only on an empty workspace. This never starts a network or paid scan.
+  if(!scans.length&&!pending&&new URLSearchParams(location.search).get('demo')==='1'){
+    const demo=demoScan();
+    await db.saveScan(demo);
+    scans.unshift(demo);
+    current=demo.id;
+    settings.current=current;
+    settings.window=72;
+    await persistSettings();
+  }
+  metric=settings.metric||'plays';render();if(pending)toast('A saved scan can be resumed in Scan History after you enter the owner token.');}
 init().catch(e=>{$('#content').textContent='Could not open local storage. Allow browser site storage and reload. '+e.message;});
