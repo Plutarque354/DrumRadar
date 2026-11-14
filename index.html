@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="color-scheme" content="light dark">
+  <title>DrumRadar — Opening app</title>
+  <meta http-equiv="refresh" content="0;url=./public/index.html?demo=1">
+  <script>
+    // Keep navigation hashes, for example /DrumRadar/#hashtags.
+    const target = new URL('./public/index.html', location.href);
+    target.searchParams.set('demo', '1');
+    target.hash = location.hash;
+    location.replace(target.href);
+  </script>
+  <style>
+    body { min-height:100vh; margin:0; display:grid; place-items:center;
+      background:#0c171b; color:#e4f1ef; font:16px system-ui,sans-serif; }
+    a {color:#55d8b8;}
+  </style>
+</head>
+<body>
+  <main>
+    <h1>DrumRadar</h1>
+    <p>Opening your research workspace…</p>
+    <p><a href="./public/index.html?demo=1">Open DrumRadar directly</a></p>
+  </main>
+</body>
+</html>
