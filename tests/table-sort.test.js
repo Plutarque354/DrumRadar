@@ -1,0 +1,4 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {sortTableRows,nextTableSort} from '../public/js/table-sort.js';
+const rows=[{id:'a',plays:20,creator:'z'},{id:'b',plays:null,creator:'A'},{id:'c',plays:10,creator:'m'},{id:'d',plays:20,creator:'j'}];
+test('numeric table sorting toggles direction and leaves nulls last',()=>{let s=nextTableSort(null,'plays');assert.deepEqual(sortTableRows(rows,s,{plays:r=>r.plays}).map(r=>r.id),['a','d','c','b']);s=nextTableSort(s,'plays');assert.deepEqual(sortTableRows(rows,s,{plays:r=>r.plays}).map(r=>r.id),['c','a','d','b']);});
+test('text sorting starts A-Z then reverses',()=>{let s=nextTableSort(null,'creator');assert.deepEqual(sortTableRows(rows,s,{creator:r=>r.creator}).map(r=>r.id),['b','d','c','a']);s=nextTableSort(s,'creator');assert.deepEqual(sortTableRows(rows,s,{creator:r=>r.creator}).map(r=>r.id),['a','c','d','b']);});
