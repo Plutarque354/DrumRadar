@@ -97,7 +97,7 @@ $('#scan-open').addEventListener('click',()=>scanForm());window.addEventListener
 async function init(){[creators,scans,ideas]=await Promise.all(['creators','scans','ideas'].map(db.all));const prefs=await db.all('settings');settings=prefs.find(x=>x.id==='preferences')||{};pending=prefs.find(x=>x.id==='pending')?.value||null;if(!prefs.some(x=>x.id==='initialized')){for(const [i,h]of ['slrnoise','brycewestondrums','lukehollandd'].entries()){const c={id:h,handle:h,category:'Drummer',enabled:true,priority:i+1,zone:'',note:''};await db.put('creators',c);creators.push(c);}await db.put('settings',{id:'initialized',value:true});}scans.sort((a,b)=>Date.parse(b.startedAt)-Date.parse(a.startedAt));current=settings.current||null;
   // Hosted GitHub Pages welcome screen: show an explicitly synthetic sample
   // only on an empty workspace. This never starts a network or paid scan.
-  if(!scans.length&&!pending&&new URLSearchParams(location.search).get('demo')==='1'){
+  if(!scans.length&&!pending&&(new URLSearchParams(location.search).get('demo')==='1' || (location.hostname==='plutarque354.github.io' && location.pathname.toLowerCase().startsWith('/drumradar')))){
     const demo=demoScan();
     await db.saveScan(demo);
     scans.unshift(demo);
