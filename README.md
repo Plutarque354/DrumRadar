@@ -1,5 +1,8 @@
 # DrumRadar v1.0 — First Testable Application
 
+> **Open the live DrumRadar dashboard:** **[Launch DrumRadar →](https://plutarque354.github.io/DrumRadar/)**  
+> This GitHub repository page displays the README by design. To use the application, click the live dashboard link above instead. On first visit the hosted application displays clearly labeled synthetic demo data; live scans still require a configured gateway and credentials.
+
 A buildless, personal Instagram Reel research workspace. **Live-data acceptance is blocked until an authenticated Apify pilot succeeds.** No paid provider run was executed during this build. Demo data is synthetic and uses fictional handles, separate from your real seeded watchlist.
 
 ## Start in WebStorm (no API credentials needed)
@@ -101,4 +104,4 @@ docs/                API contract, research notes, recorded test output
 wrangler.toml        Static hosting + Worker + Durable Object binding
 ```
 
-No GitHub writes were performed. Review the ZIP locally, then copy it into your repository or push manually using your preferred workflow. Do not commit `.dev.vars`, `.env`, `.idea`, `.wrangler`, or `node_modules`.
+The static application is now hosted through GitHub Pages using the repository root `index.html`, with frontend source files under `public/`. Do not commit `.dev.vars`, `.env`, `.idea`, `.wrangler`, or `node_modules`.
