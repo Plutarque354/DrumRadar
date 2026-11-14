@@ -1,0 +1,40 @@
+
+> drumradar@1.0.0 test
+> node --test tests/*.test.js
+
+✔ separate plays and views; exact relative reach and engagement (1.9679ms)
+✔ unknown values and genuine zero stay distinct (0.45735ms)
+✔ 48h UTC inclusive boundaries; future and old pinned excluded (1.05371ms)
+✔ 72h UTC inclusive boundaries; future and old pinned excluded (0.333253ms)
+✔ reference and unverified dates excluded from ranking sample (1.299711ms)
+✔ DST transition uses IANA rules; unknown zone stays unknown (27.038301ms)
+✔ Unicode hashtag union, NFC, casefold, deduplication and URL exclusion (6.970009ms)
+✔ safe handles and exact Instagram permalinks (0.759276ms)
+✔ normalization ignores invalid rows and maintains nullable metrics (1.315996ms)
+✔ latest profile matches casefold handle or owner ID, never array position (0.860358ms)
+✔ dedupe chooses latest metrics, unions tags and preserves watchlist route (0.408967ms)
+✔ stable rankings and missing denominator exclusion (1.535939ms)
+✔ median of per-Reel ratios; evidence gate and tied competition tiers (2.992056ms)
+✔ all five tier ranges use documented percentile boundaries (0.582609ms)
+✔ 2,000-tag inventory survives complete CSV export, independent of pagination (18.282686ms)
+✔ CSV neutralizes formula injection and quotes commas/newlines (0.262436ms)
+✔ auth fails closed and untrusted CORS origin rejected (15.940239ms)
+✔ validation enforces caps, actor allowlist, handles and exact references (2.089814ms)
+✔ job inputs bound both row count and aggregate USD cap; reference is separate (0.981331ms)
+✔ provider fetch uses header auth, safe errors and no billable retries (1.02027ms)
+✔ provider rows strip arbitrary private and secret fields (0.371571ms)
+✔ durable replay, concurrency lock, status and paginated retrieval (7.77158ms)
+✔ uncertain POST is persisted, partial scan retained, and replay never retries (3.053819ms)
+✔ unknown scan IDs cannot enumerate arbitrary provider datasets (0.444351ms)
+✔ daily reservation stops further spend before provider call (0.944215ms)
+✔ active scan recovery includes original key and validated options without starting jobs (0.986258ms)
+✔ replaying a key with changed input is rejected without spending (1.265259ms)
+✔ static server serves buildless app and rejects missing files (182.036445ms)
+ℹ tests 28
+ℹ suites 0
+ℹ pass 28
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 389.52546

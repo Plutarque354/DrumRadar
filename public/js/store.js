@@ -1,0 +1,10 @@
+const stores=['creators','scans','reels','observations','profiles','hashtags','ideas','settings'];
+let dbPromise;
+export function database(){return dbPromise??=new Promise((resolve,reject)=>{const r=indexedDB.open(typeof location!=='undefined'&&new URLSearchParams(location.search).get('test')==='1'?'drumradar-test-v1':'drumradar-v1',1);r.onupgradeneeded=()=>{for(const n of stores) r.result.createObjectStore(n,{keyPath:'id'});};r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);r.onblocked=()=>reject(new Error('Close other DrumRadar tabs to upgrade storage.'));});}
+export async function transact(names,mode,fn){const db=await database();return new Promise((resolve,reject)=>{const tx=db.transaction(names,mode);let result;try{result=fn(tx);}catch(e){tx.abort();reject(e);return;}tx.oncomplete=()=>resolve(result);tx.onerror=()=>reject(tx.error);tx.onabort=()=>reject(tx.error||new Error('Storage transaction aborted'));});}
+export async function all(name){const db=await database();return new Promise((resolve,reject)=>{const r=db.transaction(name).objectStore(name).getAll();r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});}
+export const put=(name,value)=>transact([name],'readwrite',tx=>{tx.objectStore(name).put(value);});
+export const remove=(name,id)=>transact([name],'readwrite',tx=>{tx.objectStore(name).delete(id);});
+export async function saveScan(scan){await transact(['scans','reels','observations','profiles','hashtags'],'readwrite',tx=>{tx.objectStore('scans').put(scan);for(const r of scan.reels||[]){tx.objectStore('reels').put({...r,id:`${scan.demo?'demo':'live'}:${r.id}`});tx.objectStore('observations').put({...r,id:`${scan.id}:${r.id}`,scanId:scan.id});}for(const p of scan.profiles||[]) tx.objectStore('profiles').put({...p,id:`${scan.id}:${p.handle}`,scanId:scan.id});for(const t of scan.hashtags||[])tx.objectStore('hashtags').put({...t,id:`${scan.id}:${t.tag}`,scanId:scan.id});});}
+export async function backup(){const data={version:1};for(const s of stores)data[s]=await all(s);return data;}
+export async function clear(){await transact(stores,'readwrite',tx=>stores.forEach(s=>tx.objectStore(s).clear()));}
